@@ -19,30 +19,34 @@ public class ReportActivity extends AppCompatActivity {
         Button btnVoltar = findViewById(R.id.btnVoltar);
 
         btnVoltar.setOnClickListener(v -> voltarParaCadastro());
+
+        // Busca dados do banco
+        ProductDatabase db = ProductDatabase.getInstance(this);
+        ProductDAO produtoDao = db.productDao();
+        List<Product> lista = produtoDao.listarTodos();
+
+        gerarRelatorio(lista);
     }
 
-    // Acessa o banco de dados de produtos
-    ProductDatabase db = ProductDatabase.getInstance(this);
-    ProductDAO produtoDao = db.productDao();
-
-    // Recupera a lista de produtos cadastrados
-    List<Product> listaProdutos = produtoDao.listarTodos();
-
-    public void voltarParaCadastro() {
-        startActivity(new Intent(ReportActivity.this, MainActivity.class));
-        finish();
-    }
-
-    private void gerarRelatorioEstoque(List<Product> lista) {
-        StringBuilder relatorio = new StringBuilder();
-
-        for (Product p : lista) {
-            relatorio.append("Produto: ").append(p.getNome()).append("\n")
-                    .append("Código: ").append(p.getCodigo()).append("\n")
-                    .append("Preço: R$ ").append(String.format("%.2f", p.getPreco())).append("\n")
-                    .append("----------------------------\n\n");
+    private void gerarRelatorio(List<Product> lista) {
+        if (lista.isEmpty()) {
+            textViewRelatorio.setText("Estoque vazio.");
+            return;
         }
 
-        mostrarResultado(relatorio.toString(), lista.isEmpty());
+        StringBuilder sb = new StringBuilder();
+        for (Product p : lista) {
+            sb.append("Nome: ").append(p.getNome()).append("\n")
+                    .append("Código: ").append(p.getCodigo()).append("\n")
+                    .append("Preço: R$ ").append(String.format("%.2f", p.getPreco())).append("\n")
+                    .append("Qtd: ").append(p.getQuantidade()).append("\n")
+                    .append("----------------------------\n\n");
+        }
+        textViewRelatorio.setText(sb.toString());
+    }
+
+    public void voltarParaCadastro() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }
