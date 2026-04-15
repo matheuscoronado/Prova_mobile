@@ -19,4 +19,18 @@
         android:hint="Código do Produto (Ex: ELE-123)"
         android:inputType="textCapCharacters" />
 
+    <EditText
+        android:id="@+id/editTextProductPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Preço (R$)"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/editTextProductQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Quantidade em Estoque"
+        android:inputType="number" />
+
 </LinearLayout>
