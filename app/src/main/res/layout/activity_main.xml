@@ -33,4 +33,16 @@
         android:hint="Quantidade em Estoque"
         android:inputType="number" />
 
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar Produto"
+        android:backgroundTint="#2196F3" /> <Button
+    android:id="@+id/buttonReport"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Ver Estoque Atual"
+    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
 </LinearLayout>
