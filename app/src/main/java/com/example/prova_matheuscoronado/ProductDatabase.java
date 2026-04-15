@@ -15,4 +15,18 @@ public abstract class ProductDatabase extends RoomDatabase {
     // Instância única para o padrão Singleton
     private static ProductDatabase instancia;
 
+    // Método para obter a instância do banco de dados
+    public static synchronized ProductDatabase getInstance(Context contexto) {
+        if (instancia == null) {
+            instancia = Room.databaseBuilder(
+                            contexto.getApplicationContext(),
+                            ProductDatabase.class,
+                            "estoque-database"
+                    )
+                    .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
+                    .build();
+        }
+        return instancia;
+    }
 }
