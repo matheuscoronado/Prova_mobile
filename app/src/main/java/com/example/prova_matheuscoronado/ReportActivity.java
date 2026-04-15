@@ -32,4 +32,17 @@ public class ReportActivity extends AppCompatActivity {
         startActivity(new Intent(ReportActivity.this, MainActivity.class));
         finish();
     }
+
+    private void gerarRelatorioEstoque(List<Product> lista) {
+        StringBuilder relatorio = new StringBuilder();
+
+        for (Product p : lista) {
+            relatorio.append("Produto: ").append(p.getNome()).append("\n")
+                    .append("Código: ").append(p.getCodigo()).append("\n")
+                    .append("Preço: R$ ").append(String.format("%.2f", p.getPreco())).append("\n")
+                    .append("----------------------------\n\n");
+        }
+
+        mostrarResultado(relatorio.toString(), lista.isEmpty());
+    }
 }
