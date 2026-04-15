@@ -21,6 +21,13 @@ public class ReportActivity extends AppCompatActivity {
         btnVoltar.setOnClickListener(v -> voltarParaCadastro());
     }
 
+    // Acessa o banco de dados de produtos
+    ProductDatabase db = ProductDatabase.getInstance(this);
+    ProductDAO produtoDao = db.productDao();
+
+    // Recupera a lista de produtos cadastrados
+    List<Product> listaProdutos = produtoDao.listarTodos();
+
     public void voltarParaCadastro() {
         startActivity(new Intent(ReportActivity.this, MainActivity.class));
         finish();
