@@ -56,5 +56,17 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Erro: Verifique os campos numéricos!", Toast.LENGTH_SHORT).show();
             }
         });
+        Button btnRelatorio = findViewById(R.id.buttonReport);
+        btnRelatorio.setOnClickListener(v ->
+                startActivity(new Intent(this, ReportActivity.class))
+        );
+    }
+    // Método auxiliar para limpar a tela
+    private void limparCampos() {
+        editNome.setText("");
+        editCodigo.setText("");
+        editPreco.setText("");
+        editQtd.setText("");
+        editNome.requestFocus();
     }
 }
